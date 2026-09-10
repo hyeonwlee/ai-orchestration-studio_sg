@@ -29,3 +29,19 @@ class Order:
 
     def pay(self):
         self.customer.add_points(self.total_price())
+
+# 검증 코드
+c1 = Customer("Jone", "vip")
+c2 = Customer("Jane")
+
+o1 = Order("A-1001", c1, [("라떼", 5500), ("크루아상", 4200)])
+o1.pay()
+print(f"[{o1.order_id}] \n주문 총액: {o1.total_price():,}\n고객 정보: {o1.customer.summary()}\n")
+
+o2 = Order("A-1002", c1, [("아메리카노", 4000)])
+o2.pay()
+print(f"[{o2.order_id}] \n주문 총액: {o2.total_price():,}\n고객 정보: {o2.customer.summary()}\n")
+
+o3 = Order("A-1003", c2, [("라떼", 5500), ("쿠키", 3500)])
+o3.pay()
+print(f"[{o3.order_id}] \n주문 총액: {o3.total_price():,}\n고객 정보: {o3.customer.summary()}\n")
