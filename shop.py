@@ -31,7 +31,7 @@ class Order:
         self.customer.add_points(self.total_price())
 
 # 검증 코드
-c1 = Customer("Jone", "vip")
+c1 = Customer("John", "vip")
 c2 = Customer("Jane")
 
 o1 = Order("A-1001", c1, [("라떼", 5500), ("크루아상", 4200)])
