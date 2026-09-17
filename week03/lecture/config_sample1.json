@@ -1,0 +1,40 @@
+{
+  "app_name": "CafeSalesDashboard",
+  "version": "1.3.0",
+  "environment": "development",
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "name": "cafe_sales_db",
+    "use_ssl": false
+  },
+  "feature_flags": {
+    "enable_dark_mode": true,
+    "enable_export_pdf": false,
+    "enable_llm_summary": true
+  },
+  "regions": [
+    "강남점",
+    "홍대점",
+    "신촌점"
+  ],
+  "admins": [
+    {
+      "name": "김도윤",
+      "email": "dykim@example.com",
+      "role": "owner"
+    },
+    {
+      "name": "이서연",
+      "email": "syl@example.com",
+      "role": "manager"
+    }
+  ],
+  "notification": {
+    "daily_report_time": "09:00",
+    "channels": [
+      "email",
+      "slack"
+    ]
+  }
+}
