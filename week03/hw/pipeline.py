@@ -37,3 +37,7 @@ memory usage: 19.7 KB
 # 2. ‘단가’ 열의 콤마를 제거하여 숫자 타입으로 변환하고, ‘매출액’ 열을 생성한다.
 df["단가"] = (pd.to_numeric(df["단가"].astype(str).str.replace(",", "", regex=False), errors="coerce").astype("Int64"))
 df["매출액"] = df["단가"] * df["수량"]
+
+# 3. ‘주문일자’에서 ‘월’을 추출한 뒤, 월별×카테고리별 매출 총합·평균·거래건수를 집계한다.
+df["월"] = pd.to_datetime(df["주문일자"]).dt.month
+report = df.groupby(["월", "카테고리"])["매출액"].agg(총매출="sum", 평균매출="mean", 거래건수="count").reset_index()
