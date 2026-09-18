@@ -33,3 +33,7 @@ Data columns (total 5 columns):
 dtypes: int64(1), str(4)
 memory usage: 19.7 KB
 '''
+
+# 2. ‘단가’ 열의 콤마를 제거하여 숫자 타입으로 변환하고, ‘매출액’ 열을 생성한다.
+df["단가"] = (pd.to_numeric(df["단가"].astype(str).str.replace(",", "", regex=False), errors="coerce").astype("Int64"))
+df["매출액"] = df["단가"] * df["수량"]
