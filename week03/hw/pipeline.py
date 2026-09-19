@@ -41,3 +41,12 @@ df["매출액"] = df["단가"] * df["수량"]
 # 3. ‘주문일자’에서 ‘월’을 추출한 뒤, 월별×카테고리별 매출 총합·평균·거래건수를 집계한다.
 df["월"] = pd.to_datetime(df["주문일자"]).dt.month
 report = df.groupby(["월", "카테고리"])["매출액"].agg(총매출="sum", 평균매출="mean", 거래건수="count").reset_index()
+
+# 4. 집계 결과를 Monthly_Report.xlsx로 저장한다. ‘월별카테고리요약’, ‘카테고리별합계’.
+with pd.ExcelWriter("Monthly_Report.xlsx", engine="openpyxl") as writer:
+    report.to_excel(writer, sheet_name="월별카테고리요약", index=False)
+    category_report = df.groupby("카테고리")["매출액"].sum().reset_index().sort_values("매출액", ascending=False)
+    category_report.to_excel(writer, sheet_name="카테고리별합계", index=False)
+
+# 5. 검증 코드로 원본 매출액 총합과 집계표 총매출 합이 일치하는지 확인한다.
+assert df["매출액"].sum() == report["총매출"].sum()
