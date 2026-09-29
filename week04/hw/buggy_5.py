@@ -25,7 +25,7 @@ def load_prices(path):
 
 def find_big_jumps(prices, threshold=100000):
     jumps = []
-    for i in range(len(prices)):
+    for i in range(len(prices)-1):            # FIXED: 올바른 인덱스에 접근하여 적절히 비교할 수 있도록 i의 반복 범위를 수정하였다.
         diff = prices[i + 1] - prices[i]      # <-- 여기가 문제의 줄
         if abs(diff) >= threshold:
             jumps.append((i, prices[i], prices[i + 1], diff))
