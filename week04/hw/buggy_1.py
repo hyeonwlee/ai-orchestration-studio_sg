@@ -16,11 +16,12 @@ def calc_total(path):
     with open(path, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)  # 사전타입으로 데이터를 읽음.
         for i, row in enumerate(reader):
-            price = int(row["price"])        # <-- 여기가 문제의 줄
+            if row["price"].strip() == "": price = 0                          # FIXED: 결측치의 경우 0으로 치환하였다.
+            else: price = int(row["price"].replace(",","").replace("원",""))  # FIXED: 숫자 문자열을 int()가 정수로 올바로 변환할 수 있도록, 문자열에 포함된 숫자 이외의 문자를 빈 문자열로 치환하게 하였다.
             qty = int(row["quantity"])
             total += price * qty
     return total
 
 if __name__ == "__main__":
-    total = calc_total("./Week4/dirty_sales.csv")
+    total = calc_total("./dirty_sales.csv")
     print(f"총 매출액: {total:,}원")
