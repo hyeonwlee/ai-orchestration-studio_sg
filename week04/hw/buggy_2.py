@@ -17,7 +17,7 @@ def load(path):
 
 def summarize(df):
     # 단가 x 수량으로 매출액 컬럼을 만든 뒤 카테고리별 합계를 낸다
-    df["매출액"] = df["단가"] * df["수량"]        # <-- 여기가 문제의 줄
+    df["매출액"] = df["price"] * df["quantity"]       # FIXED: 원하는 컬럼을 읽어올 수 있도록, csv 파일을 확인하고 해당 파일의 컬럼명과 일치하게 수정하였다.
     return df.groupby("category")["매출액"].sum()
 
 if __name__ == "__main__":
