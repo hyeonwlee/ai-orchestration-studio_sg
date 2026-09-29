@@ -24,8 +24,23 @@ def main():
                               .str.strip())
     df["price"] = pd.to_numeric(df["price"], errors="coerce")
 
+    df = df.dropna(subset=["price"])    # FIXED: 결측치 처리
+    df = df[(df["price"] >= 0) &
+        (df["price"] < 100000) &
+        (df["quantity"] > 0) &
+        (df["quantity"] < 10000)]       # FIXED: 이상치 처리
+
     # 매출액 = 단가 x 수량 (NaN이 섞이면 그 행의 매출액도 NaN)
     df["revenue"] = df["price"] * df["quantity"]
+
+    '''
+    df.info()
+    print(df.describe())
+
+    print(df.sort_values("price").head(5))
+    print(df.sort_values("price").tail(5))
+    print(df.sort_values("quantity").tail(5))
+    '''
 
     # sum()은 NaN을 조용히 건너뛰고, 음수/극단값은 그대로 더한다
     total = df["revenue"].sum()
@@ -33,7 +48,6 @@ def main():
 
     print(f"총 매출액: {total:,.0f}원")
     print(f"평균 단가: {avg_price:,.0f}원")
-    # 출력은 그럴듯하지만, 이 숫자를 그대로 믿어도 될까?
 
 if __name__ == "__main__":
     main()
