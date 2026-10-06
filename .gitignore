@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+venv1/
+.DS_Store
+.vscode/
+test.py
