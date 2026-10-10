@@ -106,7 +106,7 @@
 
 - **기존 코드**: 성공과 실패 건수를 세는 데 있어 변수명으로 `success`와 `failure`를 사용했다.
 
-- **AI의 제안 및 채택 여부**: success와 failure는 각각 success_count, failure_count로 바꿨다. 값이 누적되는 변수라는 점이 이름에서 바로 드러난다. 동의하여 채택하였다.
+- **AI의 제안 및 채택 여부**: success와 failure는 각각 success_cnt, failure_cnt로 바꿨다. 값이 누적되는 변수라는 점이 이름에서 바로 드러난다. 동의하여 채택하였다.
 
 
 ---
